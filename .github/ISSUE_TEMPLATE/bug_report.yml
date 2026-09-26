@@ -1,0 +1,33 @@
+name: Bug report
+description: Something does not work as described
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you do, what did you expect, what happened instead? Include the LCSC number if a part is involved.
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: Setup report
+      description: In Part Search, File > Check setup > Copy report, then paste it here.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: The last lines of the log (File > Open log file). Remove anything you do not want to share.
+      render: text
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Part Search version (Help > About), KiCad version, operating system
+      placeholder: "Part Search 3.0.1, KiCad 10.0.6, Windows 11"
+    validations:
+      required: true

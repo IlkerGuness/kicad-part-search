@@ -1,0 +1,29 @@
+{
+  "$schema": "https://go.kicad.org/api/schemas/v1",
+  "identifier": "io.github.ilkerguness.partsearch",
+  "name": "Part Search",
+  "description": "Search JLCPCB/LCSC parts and add symbol, footprint and 3D model to your own KiCad library - checked by kicad-cli before and after writing.",
+  "runtime": {
+    "type": "python"
+  },
+  "actions": [
+    {
+      "identifier": "open-partsearch",
+      "name": "Part Search",
+      "description": "Search JLCPCB/LCSC parts and add them to your personal library",
+      "show-button": true,
+      "scopes": [
+        "schematic"
+      ],
+      "entrypoint": "launch.py",
+      "icons-light": [
+        "icon_24.png",
+        "icon_48.png"
+      ],
+      "icons-dark": [
+        "icon_dark_24.png",
+        "icon_dark_48.png"
+      ]
+    }
+  ]
+}

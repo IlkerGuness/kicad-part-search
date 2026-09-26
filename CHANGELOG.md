@@ -1,0 +1,81 @@
+# Changelog
+
+All notable changes to Part Search. Versions follow [Semantic Versioning](https://semver.org): the major number
+changes when the tool is rebuilt or its way of working changes, the minor number for new features, the patch
+number for fixes.
+
+Versions before 3.0.0 were private (used on one machine only) and are listed for completeness.
+
+## [3.0.1] - unreleased
+
+### Fixed
+- Escape closes every dialog, including the preview with the symbol / footprint pictures (the embedded web view
+  did not pass the key on).
+- Dialogs are destroyed after closing instead of staying in memory.
+
+### Changed
+- Plugin identifier is now `io.github.ilkerguness.partsearch` (KiCad creates a fresh plugin environment for it).
+- About box shows the author, the project page and the licence.
+- The "added" message no longer asks to reopen the Schematic Editor - the new part is found with A right away.
+
+## [3.0.0] - 2026-09-27
+
+Complete rewrite as an installable KiCad plugin.
+
+### Added
+- Setup assistant, opened on the first start: installs easyeda2kicad (pinned version and hashes), registers the
+  personal library in KiCad (backup of every changed file, only additions), explains how to get the optional
+  offline parts database.
+- Settings window: language (English, Turkish), theme (system, light, dark), library names and folders, tools,
+  search limits, double-click action.
+- "Check setup" report; notice bar when something needed is missing.
+- Preview window with symbol and footprint pictures before anything is written.
+- Online search is chosen automatically when the offline database is not installed.
+- New symbol libraries are written in the file format of the KiCad version in use.
+- Clear message when EasyEDA cannot be reached (instead of "part has no CAD data").
+- Unit tests, a behaviour comparison against the previous version, `tools/build_plugin.py`.
+
+### Changed
+- One Python package (`partsearch/`) instead of loose scripts; no personal paths, everything auto-detected.
+- The plugin folder is self-contained; KiCad installs the only dependency from `requirements.txt`.
+- Licensed under AGPL-3.0-or-later.
+
+## [2.0.2] - 2026-09-25 (private)
+
+### Fixed
+- The summary of a skipped part no longer claims a new footprint.
+
+## [2.0.1] - 2026-09-25 (private)
+
+### Fixed
+- Searches never finished in the window: a wxPython cursor call raised an error inside the worker hand-off. Errors
+  are now logged and shown, and a watchdog stops waiting for a search that does not answer.
+- A late result could write to an already closed log.
+
+## [2.0.0] - 2026-09-25 (private)
+
+First version with a window: "Part Search".
+
+### Added
+- Search in the offline JLCPCB parts database (from the JLCPCB Tools plugin) and online at JLCPCB.
+- Result list with Basic / Preferred / Extended, stock, price and "already in library".
+- Import pipeline with named stages (check, fetch, transform, validate, plan, write, verify); symbols and
+  footprints are loaded by `kicad-cli` before and after writing.
+- Importing a part again creates a suffixed copy (`NAME-1`) instead of overwriting.
+- SVG / HTML preview, import history, log.
+- Button in the Schematic Editor toolbar (KiCad IPC plugin).
+
+## [1.0.1] - 2026-09-25 (private)
+
+### Fixed
+- Each run uses its own staging folder, so a second import no longer fails on leftovers.
+- Console output and UTF-8 text (Chinese manufacturer names) on Windows PowerShell.
+
+## [1.0.0] - 2026-09-25 (private)
+
+### Added
+- `getpart`: command-line import of an LCSC part (symbol, footprint, 3D model) into one personal library with
+  consistent names, `${MYLIB_DIR}` 3D paths, a parts registry and backups; never overwrites an existing part.
+
+[3.0.1]: https://github.com/IlkerGuness/kicad-part-search/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/IlkerGuness/kicad-part-search/releases/tag/v3.0.0

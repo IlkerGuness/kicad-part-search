@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+dist/
+tests/out/
+# easyeda2kicad output (EasyEDA/LCSC data) - not published; create with: python tests/make_fixtures.py
+tests/fixtures/
+# development only
+kicad_plugin/location.txt
+# behaviour comparison against the private pre-3.0 code (only works on the original development machine)
+tests/golden_run.py
+tests/compare_golden.py

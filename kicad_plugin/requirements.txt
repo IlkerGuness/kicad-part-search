@@ -1,0 +1,6 @@
+# Installed by KiCad into this plugin's own Python environment the first time the plugin is loaded.
+# easyeda2kicad (AGPL-3.0, https://github.com/uPesy/easyeda2kicad.py) converts EasyEDA/LCSC parts to KiCad files.
+# Pinned to the tested version; pip checks the published SHA-256 hashes (wheel, source archive).
+easyeda2kicad==1.0.1 \
+    --hash=sha256:b5a460650c5dd0af35a70658f433f63355fdbdf2c2b9e3bc411bc11ea98d06ed \
+    --hash=sha256:122a48fafa3b918e730185c973dd342183928b8a0dbe24436d13d58b90290e84
