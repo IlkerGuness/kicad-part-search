@@ -20,6 +20,12 @@ Checklist for a new version (Windows, KiCad 10). Every step has to pass before t
 5. Commit, tag `v<version>`, push both, and wait for the GitHub Actions run to pass.
 6. Create the GitHub release from the tag: title `Part Search <version>`, notes from `CHANGELOG.md`, attach
    `partsearch-<version>.zip`, `partsearch-<version>-pcm.zip` and `SHA256SUMS.txt` (`certutil -hashfile dist\partsearch-<version>.zip SHA256`).
-7. KiCad Plugin and Content Manager: add the new entry of `dist/pcm-metadata-<version>.json` to
+7. Part Search package repository (GitHub Pages, branch `gh-pages`): copy the live
+   https://ilkerguness.github.io/kicad-part-search/packages.json to `dist/pcm-repo-published/packages.json` (keeps
+   the older versions), run `python tools/build_pcm_repo.py`, replace the contents of the `gh-pages` branch with
+   `dist/pcm-repo/` (including `.nojekyll`), push, and check in KiCad (*Plugin and Content Manager*) that the new
+   version is offered.
+8. Official KiCad repository (only once the KiCad team has agreed - the plugin uses JLCPCB / LCSC services, see
+   https://dev-docs.kicad.org/en/addons/ "Commercial Services"): add the new entry of `dist/pcm-metadata-<version>.json` to
    `packages/<identifier>/metadata.json` in a merge request to https://gitlab.com/kicad/addons/metadata
    (the pcm zip must already be attached to the GitHub release, because `download_url` points there).

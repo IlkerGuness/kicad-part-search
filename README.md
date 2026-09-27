@@ -28,8 +28,14 @@ It adds parts to your library only. Placing them is up to you (Schematic Editor,
 
 ## Install
 
-**Easiest:** download `partsearch-<version>-pcm.zip` from the [Releases](../../releases) page and install it in KiCad
-with *Plugin and Content Manager → Install from File…*, then continue with step 3 below.
+**Easiest — from the Part Search package repository** (you also get updates in KiCad):
+
+1. In KiCad open *Plugin and Content Manager* and click *Manage…* next to the repository list.
+2. Add `https://ilkerguness.github.io/kicad-part-search/repository.json`, select it, and install **Part Search**.
+3. Continue with step 3 below.
+
+**From a file:** download `partsearch-<version>-pcm.zip` from the [Releases](../../releases) page and install it in
+KiCad with *Plugin and Content Manager → Install from File…*, then continue with step 3 below.
 
 **By hand:**
 

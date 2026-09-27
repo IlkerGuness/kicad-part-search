@@ -6,6 +6,13 @@ number for fixes.
 
 Versions before 3.0.0 were private (used on one machine only) and are listed for completeness.
 
+## [Unreleased]
+
+### Added
+- Own package repository for KiCad's Plugin and Content Manager on GitHub Pages
+  (`https://ilkerguness.github.io/kicad-part-search/repository.json`), built with `tools/build_pcm_repo.py`, so
+  Part Search can be installed and updated from inside KiCad.
+
 ## [3.0.2] - 2026-09-27
 
 ### Changed
