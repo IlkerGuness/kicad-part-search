@@ -1,0 +1,46 @@
+{
+  "packages": [
+    {
+      "name": "Part Search",
+      "description": "Search JLCPCB/LCSC parts and add symbol, footprint and 3D model to your own library, checked by KiCad before and after writing.",
+      "description_full": "Part Search finds JLCPCB / LCSC parts (offline in the JLCPCB Tools parts list, or online at JLCPCB), shows the symbol and footprint before anything is written, and adds symbol, footprint and 3D model to one personal library.\n\n- Every part is loaded by KiCad (kicad-cli) before it is written and again from your library afterwards.\n- Nothing is overwritten: importing a part again creates NAME-1, and every write keeps a backup.\n- Consistent names, 3D model paths through a path variable, a registry of what came from where.\n- Setup assistant for new users; English and Turkish interface; light and dark theme.\n\nUses easyeda2kicad (installed automatically) for the conversion. Library only - it does not place parts in the schematic. Tested on KiCad 10 on Windows.\n\nNot affiliated with JLCPCB, LCSC or EasyEDA.",
+      "identifier": "io.github.ilkerguness.partsearch",
+      "type": "plugin",
+      "author": {
+        "name": "İlker Güneş (Zogolder)",
+        "contact": {
+          "github": "https://github.com/IlkerGuness"
+        }
+      },
+      "license": "GPL-3.0",
+      "resources": {
+        "homepage": "https://github.com/IlkerGuness/kicad-part-search",
+        "issues": "https://github.com/IlkerGuness/kicad-part-search/issues"
+      },
+      "tags": [
+        "jlcpcb",
+        "lcsc",
+        "easyeda",
+        "library",
+        "symbols",
+        "footprints",
+        "part-import"
+      ],
+      "versions": [
+        {
+          "version": "3.0.2",
+          "status": "stable",
+          "kicad_version": "10.0",
+          "runtime": "ipc",
+          "platforms": [
+            "windows"
+          ],
+          "download_url": "https://github.com/IlkerGuness/kicad-part-search/releases/download/v3.0.2/partsearch-3.0.2-pcm.zip",
+          "download_sha256": "6a11aa4b49760fc9edb8ef8f6254b7c67ed2b70008acfd18b49f72165f9512ab",
+          "download_size": 99080,
+          "install_size": 259442
+        }
+      ]
+    }
+  ]
+}

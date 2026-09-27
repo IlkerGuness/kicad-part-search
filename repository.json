@@ -1,0 +1,22 @@
+{
+  "$schema": "https://go.kicad.org/pcm/schemas/v1#/definitions/Repository",
+  "name": "Part Search by İlker Güneş (Zogolder)",
+  "maintainer": {
+    "name": "İlker Güneş (Zogolder)",
+    "contact": {
+      "github": "https://github.com/IlkerGuness"
+    }
+  },
+  "packages": {
+    "url": "https://ilkerguness.github.io/kicad-part-search/packages.json",
+    "sha256": "4e259e55bf299785c5a47d996ff2306757ab32e42f72503ac4ad269a13e768b0",
+    "update_timestamp": 1790514591,
+    "update_time_utc": "2026-09-27 13:09:51"
+  },
+  "resources": {
+    "url": "https://ilkerguness.github.io/kicad-part-search/resources.zip",
+    "sha256": "3fe3b7f491e89a9b575181ff14295ec147c9225505355d9a97b7c52b4746890f",
+    "update_timestamp": 1790514591,
+    "update_time_utc": "2026-09-27 13:09:51"
+  }
+}
