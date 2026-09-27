@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2026 İlker Güneş (Zogolder)
 """Start the window: python -m partsearch  (use KiCad's bundled python, it ships wxPython)."""
 from __future__ import annotations

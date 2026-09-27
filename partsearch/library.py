@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2026 İlker Güneş (Zogolder)
 """The importer: fetch a part with easyeda2kicad, rename/validate it, write it into the personal library,
 then re-read everything from disk to prove it is really there.

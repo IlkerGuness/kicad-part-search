@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2026 İlker Güneş (Zogolder)
 """Interface languages. English text is the key; other languages map it to their translation.
 Log lines stay English on purpose (they are for bug reports).

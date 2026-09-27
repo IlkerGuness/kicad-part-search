@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2026 İlker Güneş (Zogolder)
 """Double-click / launcher entry for the window (runs without a console under pythonw)."""
 import os

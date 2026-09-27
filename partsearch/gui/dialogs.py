@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2026 İlker Güneş (Zogolder)
 """Dialogs: settings, setup check, preview/confirm, history, help, about, messages."""
 from __future__ import annotations
@@ -125,7 +125,7 @@ def about(parent) -> None:
     info.SetCopyright("(C) 2026 %s" % AUTHOR)
     info.AddDeveloper(AUTHOR)
     info.SetWebSite(PROJECT_URL, T("Project page"))
-    info.SetLicence(T("Part Search is free software under the GNU Affero General Public License, version 3 or "
+    info.SetLicence(T("Part Search is free software under the GNU General Public License, version 3 or "
                       "later. It comes with ABSOLUTELY NO WARRANTY - check imported footprints against the "
                       "datasheet before ordering boards."))
     wx.adv.AboutBox(info, parent)

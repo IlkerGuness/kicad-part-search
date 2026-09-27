@@ -6,6 +6,17 @@ number for fixes.
 
 Versions before 3.0.0 were private (used on one machine only) and are listed for completeness.
 
+## [3.0.2] - 2026-09-27
+
+### Changed
+- Licence changed from AGPL-3.0-or-later to GPL-3.0-or-later, the licence of KiCad and of most KiCad plugins, so
+  the package can be listed in KiCad's Plugin and Content Manager. easyeda2kicad (AGPL-3.0) is not included and
+  is installed separately; the two licences explicitly allow this combination.
+
+### Added
+- Package for KiCad's Plugin and Content Manager (`tools/build_pcm.py`, `partsearch-3.0.2-pcm.zip`): install it
+  with *Plugin and Content Manager → Install from File…*.
+
 ## [3.0.1] - 2026-09-27
 
 First public release.
@@ -83,4 +94,5 @@ First version with a window: "Part Search".
 - `getpart`: command-line import of an LCSC part (symbol, footprint, 3D model) into one personal library with
   consistent names, `${MYLIB_DIR}` 3D paths, a parts registry and backups; never overwrites an existing part.
 
+[3.0.2]: https://github.com/IlkerGuness/kicad-part-search/releases/tag/v3.0.2
 [3.0.1]: https://github.com/IlkerGuness/kicad-part-search/releases/tag/v3.0.1

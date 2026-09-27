@@ -28,6 +28,11 @@ It adds parts to your library only. Placing them is up to you (Schematic Editor,
 
 ## Install
 
+**Easiest:** download `partsearch-<version>-pcm.zip` from the [Releases](../../releases) page and install it in KiCad
+with *Plugin and Content Manager → Install from File…*, then continue with step 3 below.
+
+**By hand:**
+
 1. Download `partsearch-<version>.zip` from the [Releases](../../releases) page.
 2. Unzip it into KiCad's plugin folder, so that you get `…/plugins/partsearch/plugin.json`:
    - Windows: `Documents\KiCad\10.0\plugins\`
@@ -116,7 +121,7 @@ datasheet — compare pads and pin numbers before ordering boards.
 ## Licence and credits
 
 Part Search © 2026 İlker Güneş (Zogolder), licensed under the
-[GNU Affero General Public License v3.0 or later](LICENSE).
+[GNU General Public License v3.0 or later](LICENSE).
 
 It builds on [easyeda2kicad](https://github.com/uPesy/easyeda2kicad.py) (AGPL-3.0), KiCad, and optionally the
 parts database of [JLCPCB Tools](https://github.com/Bouni/kicad-jlcpcb-tools) by Bouni. No third-party code or

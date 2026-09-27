@@ -12,5 +12,5 @@ Bug reports and pull requests are welcome.
 - **Library tests** need downloaded fixtures: `python tests/make_fixtures.py` (they are EasyEDA data and are
   not committed).
 
-By contributing you agree that your contribution is licensed under the AGPL-3.0-or-later, like the rest of the
+By contributing you agree that your contribution is licensed under the GPL-3.0-or-later, like the rest of the
 project.

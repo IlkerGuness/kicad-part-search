@@ -1,6 +1,8 @@
 # Third-party software and data
 
-Part Search itself is licensed under the GNU Affero General Public License v3.0 or later (see `LICENSE`).
+Part Search itself is licensed under the GNU General Public License v3.0 or later (see `LICENSE`), like KiCad.
+It is used together with easyeda2kicad, which is AGPL-3.0; the GPL-3.0 and AGPL-3.0 explicitly allow this
+combination (section 13 of both licences).
 It does **not** bundle any third-party code or data. It uses the following, each obtained separately by the user:
 
 | What | Used for | Licence / terms | How it gets onto the computer |

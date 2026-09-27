@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2026 İlker Güneş (Zogolder)
 """Unit tests for the parts that are new in the refactor (runs with any python >= 3.10, no wx, no network):
     python -m unittest discover -s tests -v

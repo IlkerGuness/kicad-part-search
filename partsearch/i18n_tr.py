@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2026 İlker Güneş (Zogolder)
 """Turkish interface text. Key = the English text (see i18n.py); keep every %s / %d in the same order."""
 STRINGS = {
@@ -224,8 +224,8 @@ STRINGS = {
     "Package": "Kılıf",
     "Part number, value or LCSC id - e.g. 10k 0603, ESP32-C3, C25804":
         "Parça numarası, değer ya da LCSC no - örn. 10k 0603, ESP32-C3, C25804",
-    "Part Search is free software under the GNU Affero General Public License, version 3 or later. It comes with ABSOLUTELY NO WARRANTY - check imported footprints against the datasheet before ordering boards.":
-        "Part Search, GNU Affero Genel Kamu Lisansı sürüm 3 veya sonrası altında özgür yazılımdır. HİÇBİR GARANTİ vermez - kart siparişinden önce içe aktarılan footprint'leri datasheet ile karşılaştır.",
+    "Part Search is free software under the GNU General Public License, version 3 or later. It comes with ABSOLUTELY NO WARRANTY - check imported footprints against the datasheet before ordering boards.":
+        "Part Search, GNU Genel Kamu Lisansı sürüm 3 veya sonrası altında özgür yazılımdır. HİÇBİR GARANTİ vermez - kart siparişinden önce içe aktarılan footprint'leri datasheet ile karşılaştır.",
     "Part Search is not ready yet: %s.": "Part Search henüz hazır değil: %s.",
     "Part Search needs three things. Everything below can also be done by hand - nothing is changed without your click, and every KiCad file is backed up before it is changed.":
         "Part Search'ün üç şeye ihtiyacı var. Aşağıdakilerin hepsi elle de yapılabilir - sen tıklamadan hiçbir şey değişmez ve her KiCad dosyası değiştirilmeden önce yedeklenir.",

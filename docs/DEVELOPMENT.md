@@ -2,7 +2,7 @@
 
 Find a JLCPCB/LCSC part, preview it, and add symbol + footprint + 3D model to a personal KiCad library -
 checked by KiCad (kicad-cli) before and after writing. Library only; nothing is placed in a schematic.
-Licence: AGPL-3.0-or-later (`LICENSE`); third-party software and data: `THIRD_PARTY_NOTICES.md`.
+Licence: GPL-3.0-or-later (`LICENSE`); third-party software and data: `THIRD_PARTY_NOTICES.md`.
 All files in the repository are in English (the Turkish interface text lives in `partsearch/i18n_tr.py`).
 
 User documentation: [README](../README.md).

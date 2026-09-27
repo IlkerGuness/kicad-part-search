@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2026 İlker Güneş (Zogolder)
 """'Check setup': every external thing the tool depends on, each with a clear OK / problem line.
 Pure functions (no GUI) so they can be tested and printed from the command line:
