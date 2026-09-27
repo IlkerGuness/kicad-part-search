@@ -38,8 +38,15 @@ class _WinInput:
         self.u = ctypes.windll.user32
 
     def focus(self, win):
+        """Returns True if the window really got the foreground (Windows refuses it to a background process while
+        the user works in another program). No Alt-key trick: a lone Alt press puts the window into menu mode
+        and the next Escape only leaves that mode."""
         win.Raise()
         self.u.SetForegroundWindow(win.GetHandle())
+        return self.has_focus(win)
+
+    def has_focus(self, win):
+        return self.u.GetForegroundWindow() == win.GetHandle()
 
     def escape(self):
         self.u.keybd_event(0x1B, 0, 0, 0)          # VK_ESCAPE down
@@ -82,6 +89,7 @@ def main() -> int:
         ("History", lambda: dialogs.HistoryDialog(frame, ses), None),
     ]
     results = []
+    no_focus = set()
     sim = _WinInput()
     # a process started in the background may not take the keyboard focus at once: bring the window forward and
     # give Windows a moment before the first key press
@@ -100,7 +108,10 @@ def main() -> int:
                 sim.click(r.x + r.width // 2, r.y + r.height // 2)
                 wx.CallLater(800, sim.escape)
                 return
-        sim.focus(dlg)
+        if not sim.focus(dlg):
+            no_focus.add(dlg.GetTitle())             # another program kept the keyboard: not a valid test
+            dlg.EndModal(-2)
+            return
         wx.CallLater(300, sim.escape)
 
     for name, make, how in cases:
@@ -110,12 +121,22 @@ def main() -> int:
         rc = dlg.ShowModal()
         guard.Stop()
         dlg.Destroy()
+        if rc == -2:
+            results.append((name, None))
+            print("SKIP %s (could not get the keyboard focus - another window was in front)" % name, flush=True)
+            continue
         results.append((name, rc == wx.ID_CANCEL))
         print("%-4s %s" % ("OK" if rc == wx.ID_CANCEL else "FAIL", name), flush=True)
     frame.Destroy()
-    bad = [n for n, ok in results if not ok]
-    print("all dialogs close with Escape" if not bad else "NOT closed by Escape: " + ", ".join(bad))
-    return 1 if bad else 0
+    bad = [n for n, ok in results if ok is False]
+    skipped = [n for n, ok in results if ok is None]
+    if bad:
+        print("NOT closed by Escape: " + ", ".join(bad))
+    elif skipped:
+        print("incomplete - no keyboard focus for: " + ", ".join(skipped) + " (run again without using the PC)")
+    else:
+        print("all dialogs close with Escape")
+    return 1 if bad else (2 if skipped else 0)
 
 
 if __name__ == "__main__":
