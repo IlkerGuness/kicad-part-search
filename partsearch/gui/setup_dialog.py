@@ -35,27 +35,29 @@ class SetupDialog(wx.Dialog):
 
         # 1 --- easyeda2kicad
         box, self.st_easy = self._section(outer, T("1. Downloading parts (easyeda2kicad)"))
+        p = box.GetStaticBox()
         self.tx_easy = self._text(box)
         row = wx.BoxSizer(wx.HORIZONTAL)
-        self.b_install = wx.Button(self, label=T("Install easyeda2kicad"))
+        self.b_install = wx.Button(p, label=T("Install easyeda2kicad"))
         self.b_install.Bind(wx.EVT_BUTTON, self._install)
         row.Add(self.b_install, 0)
         box.Add(row, 0, wx.TOP, 6)
 
         # 2 --- library in KiCad
         box, self.st_lib = self._section(outer, T("2. Your library in KiCad"))
+        p = box.GetStaticBox()
         self.tx_lib = self._text(box)
-        self.plan_box = wx.TextCtrl(self, style=wx.TE_MULTILINE | wx.TE_READONLY, size=(-1, 110))
+        self.plan_box = wx.TextCtrl(p, style=wx.TE_MULTILINE | wx.TE_READONLY, size=(-1, 110))
         self.plan_box.SetFont(wx.Font(9, wx.FONTFAMILY_TELETYPE, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
         box.Add(self.plan_box, 0, wx.EXPAND | wx.TOP, 6)
-        self.tx_running = wx.StaticText(self, label="")
+        self.tx_running = wx.StaticText(p, label="")
         self.tx_running.SetForegroundColour(self.pal["warn"])
         self.tx_running._keep_colours = True
         box.Add(self.tx_running, 0, wx.TOP, 6)
         row = wx.BoxSizer(wx.HORIZONTAL)
-        self.b_apply = wx.Button(self, label=T("Set up in KiCad"))
+        self.b_apply = wx.Button(p, label=T("Set up in KiCad"))
         self.b_apply.Bind(wx.EVT_BUTTON, self._apply)
-        self.b_manual = wx.Button(self, label=T("Show manual steps"))
+        self.b_manual = wx.Button(p, label=T("Show manual steps"))
         self.b_manual.Bind(wx.EVT_BUTTON, self._manual)
         row.Add(self.b_apply, 0, wx.RIGHT, 6)
         row.Add(self.b_manual, 0)
@@ -63,12 +65,13 @@ class SetupDialog(wx.Dialog):
 
         # 3 --- local DB
         box, self.st_db = self._section(outer, T("3. Offline search (optional)"))
+        p = box.GetStaticBox()
         self.tx_db = self._text(box)
         row = wx.BoxSizer(wx.HORIZONTAL)
-        b = wx.Button(self, label=T("Choose database file..."))
+        b = wx.Button(p, label=T("Choose database file..."))
         b.Bind(wx.EVT_BUTTON, self._choose_db)
         row.Add(b, 0, wx.RIGHT, 6)
-        b = wx.Button(self, label=T("JLCPCB Tools web page"))
+        b = wx.Button(p, label=T("JLCPCB Tools web page"))
         b.Bind(wx.EVT_BUTTON, lambda e: webbrowser.open(JLCPCB_TOOLS_URL))
         row.Add(b, 0)
         box.Add(row, 0, wx.TOP, 6)
@@ -94,9 +97,9 @@ class SetupDialog(wx.Dialog):
 
     # ---------------------------------------------------------------- layout helpers
     def _section(self, outer, title):
-        sb = wx.StaticBoxSizer(wx.VERTICAL, self, title)
+        sb = wx.StaticBoxSizer(wx.VERTICAL, self, title)     # its controls are children of the box (wx 3.3)
         head = wx.BoxSizer(wx.HORIZONTAL)
-        st = wx.StaticText(self, label="")
+        st = wx.StaticText(sb.GetStaticBox(), label="")
         f = st.GetFont()
         f.SetWeight(wx.FONTWEIGHT_BOLD)
         st.SetFont(f)
@@ -107,7 +110,7 @@ class SetupDialog(wx.Dialog):
         return sb, st
 
     def _text(self, box):
-        t = wx.StaticText(self, label="")
+        t = wx.StaticText(box.GetStaticBox(), label="")
         box.Add(t, 0, wx.EXPAND)
         return t
 
