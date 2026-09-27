@@ -18,6 +18,10 @@ library is ever overwritten.
 
 It adds parts to your library only. Placing them is up to you (Schematic Editor, **A**).
 
+**Install:** in KiCad's *Plugin and Content Manager* add the repository
+`https://ilkerguness.github.io/kicad-part-search/repository.json` and install Part Search — step by step
+under [Install](#install).
+
 ## Status
 
 | | |
@@ -28,29 +32,53 @@ It adds parts to your library only. Placing them is up to you (Schematic Editor,
 
 ## Install
 
-**Easiest — from the Part Search package repository** (you also get updates in KiCad):
+Needs KiCad 10 (tested on Windows 11). Installing from the Part Search package repository is the easiest way, and
+KiCad then offers new versions as updates.
 
-1. In KiCad open *Plugin and Content Manager* and click *Manage…* next to the repository list.
-2. Add `https://ilkerguness.github.io/kicad-part-search/repository.json`, select it, and install **Part Search**.
-3. Continue with step 3 below.
+### From the Part Search repository (recommended)
 
-**From a file:** download `partsearch-<version>-pcm.zip` from the [Releases](../../releases) page and install it in
-KiCad with *Plugin and Content Manager → Install from File…*, then continue with step 3 below.
+1. Open the **KiCad main window** (the project manager, not the Schematic Editor) and choose
+   *Tools → Plugin and Content Manager* (Ctrl+M).
+2. At the top, next to the repository list, click **Manage…**.
+3. In *Manage Repositories* click the **+** button at the bottom left. In the small *Add Repository* window, paste
+   this address into *Fully qualified repository url* and click **OK**:
 
-**By hand:**
+   ```
+   https://ilkerguness.github.io/kicad-part-search/repository.json
+   ```
 
-1. Download `partsearch-<version>.zip` from the [Releases](../../releases) page.
-2. Unzip it into KiCad's plugin folder, so that you get `…/plugins/partsearch/plugin.json`:
-   - Windows: `Documents\KiCad\10.0\plugins\`
-   - macOS / Linux: the `plugins` folder in KiCad's documents folder (not tested yet — see the
-     [KiCad plugin documentation](https://dev-docs.kicad.org/en/apis-and-binding/ipc-api/for-addon-developers/))
-3. **Enable KiCad's plugin API**: KiCad → *Preferences* → *Plugins* → enable the API server. KiCad only shows
+   ![Plugin and Content Manager: Manage... > + > Add Repository with the Part Search address](docs/images/pcm-add-repository.png)
+4. Click **Save**.
+5. In the repository list at the top choose **Part Search by İlker Güneş (Zogolder)**. Part Search is listed under
+   *Plugins*: click **Install**, then **Apply Pending Changes** at the bottom right.
+
+   ![The Part Search repository selected in the Plugin and Content Manager](docs/images/pcm-repository.png)
+
+   (The picture was taken on a PC where Part Search is already installed, so the button says *Uninstall*.)
+6. Continue with [After installing](#after-installing).
+
+To update later: open the Plugin and Content Manager, choose the Part Search repository and click **Update**
+(or *Update All*).
+
+### Other ways
+
+- **From a file:** download `partsearch-<version>-pcm.zip` from the [Releases](../../releases) page and install it
+  with *Plugin and Content Manager → Install from File…*.
+- **By hand:** download `partsearch-<version>.zip` from the [Releases](../../releases) page and unzip it into
+  KiCad's plugin folder, so that you get `…/plugins/partsearch/plugin.json`:
+  - Windows: `Documents\KiCad\10.0\plugins\`
+  - macOS / Linux: the `plugins` folder in KiCad's documents folder (not tested yet — see the
+    [KiCad plugin documentation](https://dev-docs.kicad.org/en/apis-and-binding/ipc-api/for-addon-developers/))
+
+### After installing
+
+1. **Enable KiCad's plugin API**: KiCad → *Preferences* → *Plugins* → enable the API server. KiCad only shows
    buttons of plugins like this one when the API is on. Part Search does not read or change your open design —
    the button only starts the Part Search window.
-4. Restart KiCad (or, in the Schematic Editor, *Tools → Refresh Plugins*). KiCad creates a Python environment for
+2. Restart KiCad (or, in the Schematic Editor, *Tools → Refresh Plugins*). KiCad creates a Python environment for
    the plugin and installs its one dependency (easyeda2kicad, pinned version, checked against its published hash).
    This needs internet once.
-5. Open the Schematic Editor and click the **Part Search** button in the top toolbar.
+3. Open the Schematic Editor and click the **Part Search** button in the top toolbar.
 
 On the first start the **setup assistant** opens and shows three things:
 
@@ -112,7 +140,7 @@ They work well side by side — for example JLCPCB Tools for the order, Part Sea
 
 | Problem | What to do |
 |---|---|
-| No Part Search button | Enable the plugin API (Install, step 3) and restart KiCad. |
+| No Part Search button | Enable the plugin API ([After installing](#after-installing), step 1) and restart KiCad. |
 | "easyeda2kicad is not installed" | *File → Setup assistant → Install*, or in KiCad *Preferences → Plugins* use "Recreate Plugin Environment". |
 | "EasyEDA could not be reached" | No internet, or a firewall / proxy blocks easyeda.com. |
 | "EasyEDA has no CAD data" | That part has no symbol / footprint on EasyEDA; pick another or draw it yourself. |

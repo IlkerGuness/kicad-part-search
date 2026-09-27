@@ -77,7 +77,7 @@ def main() -> None:
                                          encoding="utf-8", newline="\n")
     (out / ".nojekyll").write_text("", encoding="utf-8")
     latest = package["versions"][0]["version"]
-    (out / "index.html").write_text(INDEX % {"url": BASE_URL + "repository.json", "version": latest,
+    (out / "index.html").write_text(INDEX % {"url": BASE_URL + "repository.json", "version": latest, "name": REPO_NAME,
                                              "home": package["resources"]["homepage"]},
                                     encoding="utf-8", newline="\n")
     print("built %s: %s, versions %s" % (out, package["identifier"], ", ".join(v["version"] for v in package["versions"])))
@@ -93,9 +93,13 @@ code{background:#8882;padding:.1rem .3rem;border-radius:4px;word-break:break-all
 <h1>Part Search - KiCad PCM repository</h1>
 <p>This is a package repository for KiCad's Plugin and Content Manager. Latest version: %(version)s.</p>
 <ol>
-<li>In KiCad open <b>Plugin and Content Manager</b> and click <b>Manage...</b> next to the repository list.</li>
-<li>Add this URL:<br><code>%(url)s</code></li>
-<li>Select the repository, find <b>Part Search</b> and install it.</li>
+<li>In the <b>KiCad main window</b> choose <b>Tools &rarr; Plugin and Content Manager</b>.</li>
+<li>Click <b>Manage...</b> next to the repository list, then the <b>+</b> button.</li>
+<li>Paste this address, click <b>OK</b>, then <b>Save</b>:<br><code>%(url)s</code></li>
+<li>Choose <b>%(name)s</b> in the repository list, click <b>Install</b> next to Part Search, then
+<b>Apply Pending Changes</b>.</li>
+<li>Enable the plugin API (<b>Preferences &rarr; Plugins</b>) and restart KiCad. The Part Search button is in the
+Schematic Editor toolbar.</li>
 </ol>
 <p>Project page, documentation and issues: <a href="%(home)s">%(home)s</a></p>
 </body>
