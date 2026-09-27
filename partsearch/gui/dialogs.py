@@ -149,7 +149,7 @@ class PreviewDialog(wx.Dialog):
         g = wx.FlexGridSizer(cols=2, vgap=4, hgap=12)
         g.AddGrowableCol(1)
         rows = [(T("Symbol"), "%s : %s" % (ses.ctx.symbol_lib, pp.symbol)),
-                (T("Footprint"), "%s : %s  (%s)" % (ses.ctx.footprint_lib, pp.footprint, T(pp.fp_action))),
+                (T("Footprint"), "%s : %s  -  %s" % (ses.ctx.footprint_lib, pp.footprint, T(pp.fp_action))),
                 (T("3D model"), ", ".join(n for _, n in pp.model_files) or T("none")),
                 (T("Pins / pads"), "%s / %s" % (pp.info.get("pins"), pp.info.get("pads"))),
                 (T("MPN"), pp.info.get("MPN") or "-"), (T("Manufacturer"), pp.info.get("Manufacturer") or "-")]

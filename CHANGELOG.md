@@ -6,19 +6,25 @@ number for fixes.
 
 Versions before 3.0.0 were private (used on one machine only) and are listed for completeness.
 
-## [3.0.1] - unreleased
+## [3.0.1] - 2026-09-27
+
+First public release.
 
 ### Fixed
-- Escape closes every dialog, including the preview with the symbol / footprint pictures (the embedded web view
-  did not pass the key on).
+- Escape closes every dialog. In 3.0.0 the preview did not close when its pictures had the keyboard focus (the
+  embedded web view kept the key); checked with real key presses on Windows for all seven dialogs.
 - Dialogs are destroyed after closing instead of staying in memory.
+- Setup assistant: controls are created inside their section box (wxWidgets 3.3 warned about the layout).
+- Preview: the footprint line no longer shows nested brackets.
 
 ### Changed
-- Plugin identifier is now `io.github.ilkerguness.partsearch` (KiCad creates a fresh plugin environment for it).
+- Plugin identifier is now `io.github.ilkerguness.partsearch` (KiCad creates a fresh plugin environment for it and
+  installs easyeda2kicad from `requirements.txt` - verified).
 - About box shows the author, the project page and the licence.
 - The "added" message no longer asks to reopen the Schematic Editor - the new part is found with A right away.
+- The command-line summary header says "partsearch" instead of the old name "getpart".
 
-## [3.0.0] - 2026-09-27
+## [3.0.0] - 2026-09-27 (private)
 
 Complete rewrite as an installable KiCad plugin.
 
@@ -77,5 +83,4 @@ First version with a window: "Part Search".
 - `getpart`: command-line import of an LCSC part (symbol, footprint, 3D model) into one personal library with
   consistent names, `${MYLIB_DIR}` 3D paths, a parts registry and backups; never overwrites an existing part.
 
-[3.0.1]: https://github.com/IlkerGuness/kicad-part-search/compare/v3.0.0...HEAD
-[3.0.0]: https://github.com/IlkerGuness/kicad-part-search/releases/tag/v3.0.0
+[3.0.1]: https://github.com/IlkerGuness/kicad-part-search/releases/tag/v3.0.1

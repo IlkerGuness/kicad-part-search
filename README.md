@@ -4,7 +4,7 @@ Find a JLCPCB / LCSC part, look at its symbol and footprint, and add it — symb
 your own KiCad library. Every part is loaded by KiCad itself before and after it is written, and nothing in your
 library is ever overwritten.
 
-<!-- screenshot / short GIF: search -> preview -> add (to be added) -->
+![Part Search: results for "10k 0603" from the offline JLCPCB list, part details on the right](docs/images/main-window.png)
 
 - **Search** the offline JLCPCB parts list (fast, from the JLCPCB Tools plugin) or JLCPCB online (live stock).
 - **See before you add**: symbol and footprint pictures, pin / pad count, 3D model, warnings.
@@ -36,8 +36,9 @@ It adds parts to your library only. Placing them is up to you (Schematic Editor,
 3. **Enable KiCad's plugin API**: KiCad → *Preferences* → *Plugins* → enable the API server. KiCad only shows
    buttons of plugins like this one when the API is on. Part Search does not read or change your open design —
    the button only starts the Part Search window.
-4. Restart KiCad. KiCad creates a Python environment for the plugin and installs its one dependency
-   (easyeda2kicad, pinned version, checked against its published hash). This needs internet once.
+4. Restart KiCad (or, in the Schematic Editor, *Tools → Refresh Plugins*). KiCad creates a Python environment for
+   the plugin and installs its one dependency (easyeda2kicad, pinned version, checked against its published hash).
+   This needs internet once.
 5. Open the Schematic Editor and click the **Part Search** button in the top toolbar.
 
 On the first start the **setup assistant** opens and shows three things:
@@ -58,6 +59,8 @@ copy back when it closes. Part Search checks again on its next start.
 2. Pick a part. Green type = JLCPCB Basic part (no extra assembly fee), grey = out of stock, highlighted = already
    in your library.
 3. *Add to library…* — the part is downloaded, converted, checked, shown to you, and written only after you confirm.
+
+   ![Preview before adding: symbol and footprint as KiCad draws them, names, pin / pad count, 3D files](docs/images/preview.png)
 4. In the Schematic Editor press **A** and search the symbol name.
 
 *File → Check setup* shows what is missing; everything is logged (*File → Open log file*).
@@ -74,8 +77,25 @@ The symbol gets the `LCSC Part #`, MPN and manufacturer fields and a footprint l
 
 ## Why another tool?
 
-<!-- To be written: what Part Search does differently from easyeda2kicad on its own, JLCPCB Tools, impart and
-     similar tools. -->
+Good tools for LCSC / EasyEDA parts already exist, and Part Search builds on two of them:
+
+| Tool | What it is for |
+|---|---|
+| [easyeda2kicad](https://github.com/uPesy/easyeda2kicad.py) | Command-line converter: give it an LCSC number, get a KiCad symbol, footprint and 3D model. Part Search uses it for the conversion. |
+| [JLCPCB Tools](https://github.com/Bouni/kicad-jlcpcb-tools) | Preparing a JLCPCB assembly order: assign LCSC numbers, create BOM / CPL and Gerbers. It does not add parts to a library; its parts list is what Part Search searches offline. |
+| [impart](https://github.com/Steffen-W/Import-LIB-KiCad-Plugin) | Importing library ZIPs downloaded from SnapMagic, UltraLibrarian, Samacsys and others, plus EasyEDA parts. |
+
+Part Search covers the step between "I need a 10k 0603 that JLCPCB stocks" and "the part is in my library and I
+trust it", in one window:
+
+- **find** the part (offline list or live JLCPCB search, Basic parts first, stock and price visible),
+- **look** at the symbol and footprint before anything is written,
+- **check**: KiCad itself (`kicad-cli`) loads the converted part before writing and again from your library after,
+- **keep your library safe**: nothing is overwritten, a repeated import becomes `NAME-1`, every write is backed up,
+- **stay consistent**: one personal library, matching names, 3D paths through a path variable, a CSV registry of
+  what came from where.
+
+They work well side by side — for example JLCPCB Tools for the order, Part Search for the parts.
 
 ## Troubleshooting
 

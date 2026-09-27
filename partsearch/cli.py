@@ -53,7 +53,7 @@ def main(argv=None) -> int:
     mode = "force" if a.force else ("suffix" if a.suffix else "skip")
     from .library import process
     log = ses.logger()
-    log.banner("==== getpart %s  ids=%s mode=%s dry=%s" % (dt.datetime.now().isoformat(timespec="seconds"),
+    log.banner("==== partsearch %s  ids=%s mode=%s dry=%s" % (dt.datetime.now().isoformat(timespec="seconds"),
                                                          a.ids, mode, a.dry_run))
     results = []
     for raw in a.ids:

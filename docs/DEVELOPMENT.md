@@ -47,6 +47,8 @@ User documentation: [README](../README.md).
 | `tools/build_plugin.py` | builds the installable plugin folder + zip |
 | `tests/` | unit tests, fixture download script, GUI Escape check |
 
+Release checklist: [RELEASING.md](RELEASING.md).
+
 ## Tests
 - `python -m unittest discover -s tests -v` (no wx, no network; library tests need the fixtures).
 - Fixtures (EasyEDA data, **not in the repository**): `python tests/make_fixtures.py`.
