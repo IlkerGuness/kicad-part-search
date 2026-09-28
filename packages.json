@@ -3,7 +3,7 @@
     {
       "name": "Part Search",
       "description": "Search JLCPCB/LCSC parts and add symbol, footprint and 3D model to your own library, checked by KiCad before and after writing.",
-      "description_full": "Part Search finds JLCPCB / LCSC parts (offline in the JLCPCB Tools parts list, or online at JLCPCB), shows the symbol and footprint before anything is written, and adds symbol, footprint and 3D model to one personal library.\n\n- Every part is loaded by KiCad (kicad-cli) before it is written and again from your library afterwards.\n- Nothing is overwritten: importing a part again creates NAME-1, and every write keeps a backup.\n- Consistent names, 3D model paths through a path variable, a registry of what came from where.\n- Setup assistant for new users; English and Turkish interface; light and dark theme.\n\nUses easyeda2kicad (installed automatically) for the conversion. Library only - it does not place parts in the schematic. Tested on KiCad 10 on Windows.\n\nNot affiliated with JLCPCB, LCSC or EasyEDA.",
+      "description_full": "Part Search finds JLCPCB / LCSC parts (offline in the JLCPCB Tools parts list, or online at JLCPCB), shows the symbol and footprint before anything is written, and adds symbol, footprint and 3D model to one personal library.\n\n- Every part is loaded by KiCad (kicad-cli) before it is written and again from your library afterwards.\n- Nothing is overwritten: importing a part again creates NAME-1, and every write keeps a backup.\n- Consistent names, 3D model paths through a path variable, a registry of what came from where.\n- Setup assistant for new users; English and Turkish interface; light and dark theme.\n\nUses easyeda2kicad (installed automatically) for the conversion. Library only - it does not place parts in the schematic. Tested on KiCad 10 on Windows and macOS; needs KiCad 10 (Python 3.9 or newer).\n\nNot affiliated with JLCPCB, LCSC or EasyEDA.",
       "identifier": "io.github.ilkerguness.partsearch",
       "type": "plugin",
       "author": {
@@ -27,6 +27,20 @@
         "part-import"
       ],
       "versions": [
+        {
+          "version": "3.0.3",
+          "status": "stable",
+          "kicad_version": "10.0",
+          "runtime": "ipc",
+          "platforms": [
+            "windows",
+            "macos"
+          ],
+          "download_url": "https://github.com/IlkerGuness/kicad-part-search/releases/download/v3.0.3/partsearch-3.0.3-pcm.zip",
+          "download_sha256": "f388a09baf9aee4f42f3ee66def20950574f82ee1bb9bfb0866b13eec4673c91",
+          "download_size": 100579,
+          "install_size": 263460
+        },
         {
           "version": "3.0.2",
           "status": "stable",
