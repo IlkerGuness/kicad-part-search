@@ -264,7 +264,7 @@ class MacOSTest(Tmp):
                 mock.patch.object(sys, "base_prefix", str(fw)):
             c = config._macos_kicad_cli_candidates()
         self.assertEqual(c[0], str(app.resolve() / "Contents" / "MacOS" / "kicad-cli"))   # /var -> /private/var
-        self.assertIn("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli", c)
+        self.assertIn(str(Path("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")), c)  # \ on Windows
 
     def test_ca_bundle_only_when_needed(self):
         import ssl
