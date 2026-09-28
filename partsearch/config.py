@@ -257,9 +257,53 @@ def _kicad_cli_candidates() -> list:
         if pf.is_dir():
             c += [str(d / "bin" / exe) for d in sorted(pf.iterdir(), reverse=True)]
     elif MACOS:
-        c.append("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli")
+        c += _macos_kicad_cli_candidates()
     c.append(shutil.which("kicad-cli") or "")
     return c
+
+
+def _macos_kicad_cli_candidates() -> list:
+    """kicad-cli is inside the app bundle: <...>/KiCad.app/Contents/MacOS/kicad-cli. First the bundle whose Python
+    runs us (KiCad can be installed anywhere, e.g. ~/Applications or a renamed KiCad 10 folder), then the usual
+    places."""
+    c = []
+    for p in (getattr(sys, "_base_executable", ""), sys.base_prefix, sys.executable):
+        if not p:
+            continue
+        for parent in Path(p).resolve().parents:
+            if parent.suffix == ".app":
+                c.append(str(parent / "Contents" / "MacOS" / "kicad-cli"))
+                break
+    for root in (Path("/Applications"), Path.home() / "Applications"):
+        c.append(str(root / "KiCad" / "KiCad.app" / "Contents" / "MacOS" / "kicad-cli"))
+        try:   # newest first: /Applications/KiCad 10/KiCad.app, /Applications/KiCad.app, ...
+            apps = sorted(list(root.glob("KiCad*.app")) + list(root.glob("KiCad*/KiCad*.app")), reverse=True)
+        except OSError:
+            apps = []
+        c += [str(a / "Contents" / "MacOS" / "kicad-cli") for a in apps]
+    return c
+
+
+def ensure_ca_bundle() -> str | None:
+    """macOS: the Python inside KiCad.app may not find the system's root certificates, so HTTPS (online search,
+    easyeda2kicad) fails with CERTIFICATE_VERIFY_FAILED. If no certificate file is configured and the default one
+    does not exist, point SSL_CERT_FILE at certifi's bundle (KiCad ships certifi). It is set in os.environ, so it
+    also reaches the easyeda2kicad subprocess. Returns the file that was set, else None. Does nothing elsewhere."""
+    if not MACOS or os.environ.get("SSL_CERT_FILE"):
+        return None
+    try:
+        import ssl
+        paths = ssl.get_default_verify_paths()
+        if (paths.cafile and Path(paths.cafile).is_file()) or (paths.capath and any(Path(paths.capath).glob("*.0"))):
+            return None
+        import certifi
+        ca = certifi.where()
+    except Exception:  # noqa: BLE001 - no certifi / odd ssl build: leave it as it is
+        return None
+    if ca and Path(ca).is_file():
+        os.environ["SSL_CERT_FILE"] = ca
+        return ca
+    return None
 
 
 def _bouni_db() -> Path | None:

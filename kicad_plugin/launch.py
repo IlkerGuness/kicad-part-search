@@ -75,6 +75,11 @@ def main() -> int:
     if home is None:
         sys.stderr.write("Part Search not found (set PARTSEARCH_HOME or location.txt)\n")
         return 1
+    if sys.version_info < (3, 9):            # keep in step with partsearch.MIN_PYTHON
+        _note(home, "Python %d.%d is too old (%s) - Part Search needs 3.9 or newer (KiCad 10)"
+              % (sys.version_info[0], sys.version_info[1], sys.executable))
+        sys.stderr.write("Part Search needs Python 3.9 or newer (KiCad 10)\n")
+        return 1
     py = _gui_python()
     _note(home, "toolbar button: plugin python %s -> window python %s, API socket %s"
           % (sys.executable, py, "set" if os.environ.get("KICAD_API_SOCKET") else "not set"))

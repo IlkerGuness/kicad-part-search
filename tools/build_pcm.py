@@ -40,7 +40,7 @@ METADATA = {
         "- Consistent names, 3D model paths through a path variable, a registry of what came from where.\n"
         "- Setup assistant for new users; English and Turkish interface; light and dark theme.\n\n"
         "Uses easyeda2kicad (installed automatically) for the conversion. Library only - it does not place parts in "
-        "the schematic. Tested on KiCad 10 on Windows.\n\n"
+        "the schematic. Tested on KiCad 10 on Windows and macOS; needs KiCad 10 (Python 3.9 or newer).\n\n"
         "Not affiliated with JLCPCB, LCSC or EasyEDA."),
     "identifier": IDENTIFIER,
     "type": "plugin",
@@ -49,7 +49,7 @@ METADATA = {
     "resources": {"homepage": PROJECT_URL, "issues": PROJECT_URL + "/issues"},
     "tags": ["jlcpcb", "lcsc", "easyeda", "library", "symbols", "footprints", "part-import"],
     "versions": [{"version": __version__, "status": "stable", "kicad_version": "10.0", "runtime": "ipc",
-                  "platforms": ["windows"]}],
+                  "platforms": ["windows", "macos"]}],
 }
 
 

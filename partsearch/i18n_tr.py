@@ -16,6 +16,7 @@ STRINGS = {
     "%s": "%s",
     "%s  (downloads + log)": "%s  (indirmeler + log)",
     "%s  (version %s)": "%s  (sürüm %s)",
+    "%s  (version %s, %s)": "%s  (sürüm %s, %s)",
     "%s  (version %s) - KiCad 9 or newer is needed": "%s  (sürüm %s) - KiCad 9 veya daha yenisi gerekli",
     "%s - preview (NOT yet in your library)": "%s - önizleme (henüz kütüphanende DEĞİL)",
     "%s added and verified: %s": "%s eklendi ve doğrulandı: %s",

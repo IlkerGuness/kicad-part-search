@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import re
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -63,6 +64,12 @@ def run_checks(s: Settings) -> list[dict]:
 
     def add(name, ok, detail):
         out.append({"name": name, "ok": ok, "detail": detail})
+
+    import platform
+    from . import MIN_PYTHON
+    pyv = "%d.%d.%d" % sys.version_info[:3]
+    add("Python", sys.version_info >= MIN_PYTHON,
+        T("%s  (version %s, %s)") % (sys.executable, pyv, platform.machine() or "?"))
 
     cli = s.kicad_cli_path()
     if cli:

@@ -59,7 +59,8 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self._on_close)
         self._refresh_lib()
         self._update_db_status()
-        self.log("GUI", "%s %s window opened (pid %d, python %s)" % (APP_NAME, __version__, os.getpid(), sys.executable))
+        self.log("GUI", "%s %s window opened (pid %d, python %s %s, %s)" % (
+            APP_NAME, __version__, os.getpid(), sys.executable, sys.version.split()[0], sys.platform))
         if self.ses.settings.extra.pop("_first_run", False):
             self.log("GUI", "first start (no settings file yet) - opening the setup assistant")
             self._save_settings()                  # the next start is not a first start any more

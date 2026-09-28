@@ -6,7 +6,23 @@ number for fixes.
 
 Versions before 3.0.0 were private (used on one machine only) and are listed for completeness.
 
-## [Unreleased]
+## [3.0.3] - 2026-09-28
+
+### Fixed
+- macOS: adding a part failed with "write_text() got an unexpected keyword argument 'newline'". KiCad's Python on
+  macOS is older than 3.10, where `Path.write_text(newline=...)` was added. The symbol library is now written with
+  `open(..., newline="\n")`. Nothing was written when it failed (the library was left unchanged).
+- macOS: kicad-cli is now also found when KiCad is not at `/Applications/KiCad/KiCad.app` - it is taken from the
+  KiCad app whose Python runs Part Search, then `/Applications` and `~/Applications` are searched.
+- macOS: if KiCad's Python finds no system certificate file, `SSL_CERT_FILE` is pointed at certifi's bundle, so
+  online search and downloads do not fail with CERTIFICATE_VERIFY_FAILED.
+
+### Changed
+- Tested on macOS (KiCad 10, Intel MacBook Pro): install from the package, setup assistant, online search, preview,
+  add a part and find it with **A**. The package now lists macOS as a supported platform.
+- Minimum Python is stated and checked: 3.9 (KiCad 10 bundles 3.9 on macOS, 3.11 on Windows). An older Python
+  stops with a clear message; *Check setup* shows the Python version and CPU type. The tests run on 3.9 and 3.11,
+  on Windows, macOS and Linux.
 
 ### Added
 - Own package repository for KiCad's Plugin and Content Manager on GitHub Pages
@@ -101,5 +117,6 @@ First version with a window: "Part Search".
 - `getpart`: command-line import of an LCSC part (symbol, footprint, 3D model) into one personal library with
   consistent names, `${MYLIB_DIR}` 3D paths, a parts registry and backups; never overwrites an existing part.
 
+[3.0.3]: https://github.com/IlkerGuness/kicad-part-search/releases/tag/v3.0.3
 [3.0.2]: https://github.com/IlkerGuness/kicad-part-search/releases/tag/v3.0.2
 [3.0.1]: https://github.com/IlkerGuness/kicad-part-search/releases/tag/v3.0.1

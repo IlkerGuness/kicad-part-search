@@ -509,7 +509,8 @@ def commit(ctx: Context, p: Prepared, log, use_cli: bool = True) -> dict:
     if not sexpr.balanced(new_lib):
         raise RuntimeError("WRITE: merged symbol library would be unbalanced - aborted, nothing written")
     tmp = ctx.sym_lib.with_suffix(".kicad_sym.tmp")
-    tmp.write_text(new_lib, encoding="utf-8", newline="\n")
+    with open(tmp, "w", encoding="utf-8", newline="\n") as fh:   # Path.write_text(newline=) needs Python 3.10
+        fh.write(new_lib)
     os.replace(tmp, ctx.sym_lib)
     log("WRITE", "symbol '%s' -> %s" % (p.symbol, ctx.sym_lib))
     ctx.fp_lib.mkdir(parents=True, exist_ok=True)

@@ -12,13 +12,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        # 3.9 = KiCad 10 on macOS (the oldest supported), 3.11 = KiCad 10 on Windows
+        python: ["3.9", "3.11"]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"      # the Python version bundled with KiCad 10 on Windows
+          python-version: ${{ matrix.python }}
       - name: Static check
         run: |
           python -m pip install --disable-pip-version-check pyflakes==3.2.0

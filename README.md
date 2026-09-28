@@ -26,8 +26,9 @@ under [Install](#install).
 
 | | |
 |---|---|
-| Tested | KiCad 10.0 on Windows 11 |
-| Not tested yet | KiCad 9, macOS, Linux (the code has paths for them — reports are welcome) |
+| Tested | KiCad 10.0 on Windows 11 and macOS (Intel MacBook Pro) |
+| Needs | KiCad 10 with its bundled Python (3.9 or newer: KiCad 10 ships 3.11 on Windows, 3.9 on macOS) |
+| Not tested yet | KiCad 9, Linux, Apple Silicon Macs (reports are welcome) |
 | Version | see [CHANGELOG.md](CHANGELOG.md) |
 
 ## Install
@@ -145,6 +146,8 @@ They work well side by side — for example JLCPCB Tools for the order, Part Sea
 | "EasyEDA could not be reached" | No internet, or a firewall / proxy blocks easyeda.com. |
 | "EasyEDA has no CAD data" | That part has no symbol / footprint on EasyEDA; pick another or draw it yourself. |
 | Local search not available | The offline database is optional — see the setup assistant. |
+| macOS: "CERTIFICATE_VERIFY_FAILED" | Part Search points Python at the certifi certificates when KiCad's Python finds none. If it still fails, check *File → Check setup* and the log. |
+| macOS: kicad-cli not found | KiCad is looked for next to the running KiCad, in /Applications and ~/Applications. Otherwise set it in *Settings → Tools* (…/KiCad.app/Contents/MacOS/kicad-cli). |
 | Anything else | *File → Check setup → Copy report* and open an issue with the report and the log. |
 
 ## Always check imported parts

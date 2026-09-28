@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # SPDX-FileCopyrightText: 2026 İlker Güneş (Zogolder)
-"""Unit tests for the parts that are new in the refactor (runs with any python >= 3.10, no wx, no network):
+"""Unit tests for the parts that are new in the refactor (runs with any python >= 3.9, no wx, no network):
     python -m unittest discover -s tests -v
 """
 import json
@@ -248,6 +248,51 @@ class SetupTest(KiCadConfig):
         req = (HERE.parent / "kicad_plugin" / "requirements.txt").read_text(encoding="utf-8")
         flat = " ".join(line.strip(" \\") for line in req.splitlines() if line and not line.startswith("#"))
         self.assertEqual(" ".join(flat.split()), " ".join(sk.EASYEDA_REQUIREMENT.split()))
+
+
+class MacOSTest(Tmp):
+    """macOS-only code paths, simulated on any OS."""
+
+    def test_kicad_cli_found_from_running_bundle(self):
+        from unittest import mock
+        from partsearch import config
+        app = self.tmp / "Apps" / "KiCad 10" / "KiCad.app"
+        fw = app / "Contents" / "Frameworks" / "Python.framework" / "Versions" / "3.9"
+        (fw / "bin").mkdir(parents=True)
+        (fw / "bin" / "python3.9").write_text("")
+        with mock.patch.object(sys, "_base_executable", str(fw / "bin" / "python3.9"), create=True), \
+                mock.patch.object(sys, "base_prefix", str(fw)):
+            c = config._macos_kicad_cli_candidates()
+        self.assertEqual(c[0], str(app.resolve() / "Contents" / "MacOS" / "kicad-cli"))   # /var -> /private/var
+        self.assertIn("/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli", c)
+
+    def test_ca_bundle_only_when_needed(self):
+        import ssl
+        from unittest import mock
+        from partsearch import config
+        env = {k: v for k, v in os.environ.items() if k != "SSL_CERT_FILE"}
+        ca = self.tmp / "cacert.pem"
+        ca.write_text("x")
+        fake_certifi = mock.Mock(where=lambda: str(ca))
+        no_default = ssl.DefaultVerifyPaths(str(self.tmp / "none.pem"), str(self.tmp / "nocerts"), "", "", "", "")
+        with mock.patch.dict(os.environ, env, clear=True), mock.patch.object(config, "MACOS", False):
+            self.assertIsNone(config.ensure_ca_bundle())                    # not macOS: never touched
+        with mock.patch.dict(os.environ, env, clear=True), mock.patch.object(config, "MACOS", True), \
+                mock.patch.object(ssl, "get_default_verify_paths", lambda: no_default), \
+                mock.patch.dict(sys.modules, {"certifi": fake_certifi}):
+            self.assertEqual(config.ensure_ca_bundle(), str(ca))
+            self.assertEqual(os.environ["SSL_CERT_FILE"], str(ca))
+            os.environ["SSL_CERT_FILE"] = "/user/choice.pem"
+            self.assertIsNone(config.ensure_ca_bundle())                    # a user setting always wins
+        (self.tmp / "sys.pem").write_text("x")
+        has_default = ssl.DefaultVerifyPaths(str(self.tmp / "sys.pem"), "", "", "", "", "")
+        with mock.patch.dict(os.environ, env, clear=True), mock.patch.object(config, "MACOS", True), \
+                mock.patch.object(ssl, "get_default_verify_paths", lambda: has_default):
+            self.assertIsNone(config.ensure_ca_bundle())                    # system certificates exist
+
+    def test_python_check_line(self):
+        from partsearch import MIN_PYTHON
+        self.assertLessEqual(MIN_PYTHON, tuple(sys.version_info[:2]))
 
 
 class I18nTest(unittest.TestCase):

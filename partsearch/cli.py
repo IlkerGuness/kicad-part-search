@@ -45,6 +45,8 @@ def main(argv=None) -> int:
     ap.add_argument("--no-kicad-cli", action="store_true", help="skip kicad-cli validation (not recommended)")
     ap.add_argument("--search", nargs=2, metavar=("local|online", "QUERY"), help="search instead of importing")
     a = ap.parse_args(argv)
+    from .config import ensure_ca_bundle
+    ensure_ca_bundle()                    # macOS: before the first HTTPS request
     ses = Session()
     if a.search:
         return _search(ses, a.search[0], a.search[1])

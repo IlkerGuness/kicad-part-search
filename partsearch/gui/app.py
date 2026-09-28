@@ -29,6 +29,8 @@ def _install_excepthook(frame):
 
 
 def main() -> int:
+    from ..config import ensure_ca_bundle
+    ca = ensure_ca_bundle()               # macOS: before the first HTTPS request
     session = Session()
     app = wx.App(False)
     app.SetAppName("partsearch")
@@ -37,6 +39,8 @@ def main() -> int:
     from .main_window import MainFrame
     frame = MainFrame(session)
     _install_excepthook(frame)
+    if ca:
+        frame.log("INFO", "SSL: no system certificate file found, using certifi's (%s)" % ca)
     frame.Show()
     app.MainLoop()
     return 0
